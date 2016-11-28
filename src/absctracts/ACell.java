@@ -14,9 +14,7 @@ public abstract class ACell extends JButton implements ICell {
 	private boolean warning, question;
 	private Point point;
 	private int size;
-	
-	
-	
+
 	public ACell() {
 		super();
 		type = TypeCell.Void;
@@ -45,12 +43,15 @@ public abstract class ACell extends JButton implements ICell {
 			this.setText("");
 		}
 	}
-	public boolean isWarning(){
+
+	public boolean isWarning() {
 		return question || warning;
 	}
-	public boolean isWarningMine(){
+
+	public boolean isWarningMine() {
 		return warning;
 	}
+
 	public boolean isOpen() {
 		return open;
 	}
