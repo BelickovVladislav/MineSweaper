@@ -3,18 +3,19 @@ package core;
 import interfaces.IField;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
-
 import javax.swing.JPanel;
 
 import absctracts.ACell;
 import enums.Constants;
 import enums.Level;
+import enums.Point;
 import frames.HomeFrame;
 
 public class Field extends JPanel implements IField {
@@ -107,6 +108,7 @@ public class Field extends JPanel implements IField {
 		init(level);
 
 	}
+
 	private void generate() {
 
 		field = new ACell[getRowCount()][getColumnCount()];
@@ -148,13 +150,23 @@ public class Field extends JPanel implements IField {
 
 		for (int i = 0; i < getRowCount(); i++) {
 			for (int j = 0; j < getColumnCount(); j++) {
-
-				this.add(field[i][j]);
+				field[i][j].createCell(
+						new Point(j * constant.getCellSize() + 3, 
+								i * constant.getCellSize() + 3),
+						constant.getCellSize());
+				//this.add(field[i][j]);
 				field[i][j].addMouseListener(new MouseEventButton(field[i][j],
 						i, j));
 			}
 		}
 
+	}
+	@Override
+	public void paint(Graphics g){
+		for(int i = 0; i < getRowCount(); i++)
+			for(int j = 0; j < getColumnCount(); j++)
+				field[i][j].paint(g);
+		
 	}
 
 	// Getter
