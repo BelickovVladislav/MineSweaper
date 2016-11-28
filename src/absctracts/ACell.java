@@ -2,6 +2,9 @@ package absctracts;
 
 import interfaces.ICell;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 import javax.swing.JButton;
 
 import enums.Point;
@@ -21,6 +24,10 @@ public abstract class ACell extends JButton implements ICell {
 		open = false;
 		this.warning = false;
 		this.question = false;
+	}
+	public void createCell(Point point, int size){
+		this.point = point;
+		this.size = size;
 	}
 
 	public ACell(TypeCell type) {
@@ -92,4 +99,9 @@ public abstract class ACell extends JButton implements ICell {
 		type = TypeCell.Void;
 	}
 
+	public void paint(Graphics g) {
+		g.setColor(Color.YELLOW);
+		g.drawRect(point.getX(), point.getY(), size, size);
+
+	}
 }
