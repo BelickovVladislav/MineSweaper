@@ -1,8 +1,10 @@
 package absctracts;
 
+import interfaces.ICell;
+
 import javax.swing.JButton;
 
-import interfaces.ICell;
+import enums.Point;
 import enums.TypeCell;
 
 public abstract class ACell extends JButton implements ICell {
@@ -10,7 +12,11 @@ public abstract class ACell extends JButton implements ICell {
 	private TypeCell type;
 	private boolean open;
 	private boolean warning, question;
-
+	private Point point;
+	private int size;
+	
+	
+	
 	public ACell() {
 		super();
 		type = TypeCell.Void;
