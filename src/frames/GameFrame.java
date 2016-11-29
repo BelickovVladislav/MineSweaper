@@ -24,8 +24,7 @@ public class GameFrame extends JFrame {
 		 * Creating field and set size
 		 */
 		Field field = new Field(level);
-		this.setSize(field.getColumnCount() * field.getCellSize(),
-				field.getRowCount() * field.getCellSize());
+		this.setSize(field.getSize());
 		add(field, BorderLayout.CENTER);
 		setVisible(true);
 		addWindowListener(new WindowListener() {
