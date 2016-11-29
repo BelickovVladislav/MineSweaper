@@ -10,14 +10,14 @@ import javax.swing.JButton;
 import enums.Point;
 import enums.TypeCell;
 
-public abstract class ACell extends JButton implements ICell {
+public abstract class ACell implements ICell {
 
 	private TypeCell type;
 	private boolean open;
 	private boolean warning, question;
 	private Point point;
 	private int size;
-
+	
 	public ACell() {
 		super();
 		type = TypeCell.Void;
@@ -25,9 +25,10 @@ public abstract class ACell extends JButton implements ICell {
 		this.warning = false;
 		this.question = false;
 	}
-	public void createCell(Point point, int size){
+
+	public void createCell(Point point, int size) {
 		this.point = point;
-		this.size = size;
+		this.setSize(size);
 	}
 
 	public ACell(TypeCell type) {
@@ -39,15 +40,12 @@ public abstract class ACell extends JButton implements ICell {
 	public void warning() {
 		if (!warning && !question) {
 			warning = true;
-			this.setText("!");
 		} else if (warning && !question) {
 			question = true;
 			warning = false;
-			this.setText("?");
 		} else if (question && !warning) {
 			question = false;
 			warning = false;
-			this.setText("");
 		}
 	}
 
@@ -65,7 +63,6 @@ public abstract class ACell extends JButton implements ICell {
 
 	public void openCell() {
 		open = true;
-		this.setEnabled(false);
 	}
 
 	public TypeCell getType() {
@@ -98,10 +95,19 @@ public abstract class ACell extends JButton implements ICell {
 	public void setVoid() {
 		type = TypeCell.Void;
 	}
-
+	public Point getPoint(){
+		return point;
+	}
+	public int getSize(){
+		return size;
+	}
 	public void paint(Graphics g) {
 		g.setColor(Color.YELLOW);
-		g.drawRect(point.getX(), point.getY(), size, size);
+		g.fill3DRect(point.getX() + 5, point.getY() + 10, getSize(), getSize(), true);
 
+	}
+
+	public void setSize(int size) {
+		this.size = size;
 	}
 }
