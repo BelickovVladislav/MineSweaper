@@ -25,8 +25,8 @@ public class Mine extends ACell {
 	public void paint(Graphics g) {
 		g.setColor(Color.RED);
 		if (isOpen())
-			g.fill3DRect(getPoint().getX() + 5, getPoint().getY() + 10,
-					getSize(), getSize(), !isOpen());
+			g.fill3DRect(getPoint().getX(), getPoint().getY(), getSize(),
+					getSize(), !isOpen());
 		else
 			super.paint(g);
 	}
