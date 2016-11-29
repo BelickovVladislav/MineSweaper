@@ -152,15 +152,10 @@ public class Field extends JPanel implements IField {
 			for (int j = 0; j < getColumnCount(); j++) {
 				field[i][j].createCell(new Point(j * constant.getCellSize(), i
 						* constant.getCellSize()), constant.getCellSize());
-				
-				// this.add(field[i][j]);
-				// field[i][j].addMouseListener(new
-				// MouseEventButton(field[i][j],
-				// i, j));
 			}
-			this.addMouseListener(new MouseEventButton());
+			
 		}
-
+		this.addMouseListener(new MouseEventButton());
 	}
 
 	@Override
@@ -168,7 +163,7 @@ public class Field extends JPanel implements IField {
 		for (int i = 0; i < getRowCount(); i++)
 			for (int j = 0; j < getColumnCount(); j++)
 				field[i][j].paint(g);
-
+		super.repaint();
 	}
 
 	// Getter
@@ -213,9 +208,6 @@ public class Field extends JPanel implements IField {
 						if (event.getButton() == MouseEvent.BUTTON1
 								&& !cell.isWarning()) {
 							 cell.openCell();
-							 System.out.println("{"+i+", "+j+"}");
-							 
-							 
 							if (cell.isMine()) {
 								openMine();
 								JOptionPane
