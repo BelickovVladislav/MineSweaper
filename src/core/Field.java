@@ -150,23 +150,25 @@ public class Field extends JPanel implements IField {
 
 		for (int i = 0; i < getRowCount(); i++) {
 			for (int j = 0; j < getColumnCount(); j++) {
-				field[i][j].createCell(
-						new Point(j * constant.getCellSize() + 3, 
-								i * constant.getCellSize() + 3),
-						constant.getCellSize());
-				//this.add(field[i][j]);
-				field[i][j].addMouseListener(new MouseEventButton(field[i][j],
-						i, j));
+				field[i][j].createCell(new Point(j * constant.getCellSize(), i
+						* constant.getCellSize()), constant.getCellSize());
+				
+				// this.add(field[i][j]);
+				// field[i][j].addMouseListener(new
+				// MouseEventButton(field[i][j],
+				// i, j));
 			}
+			this.addMouseListener(new MouseEventButton());
 		}
 
 	}
+
 	@Override
-	public void paint(Graphics g){
-		for(int i = 0; i < getRowCount(); i++)
-			for(int j = 0; j < getColumnCount(); j++)
+	public void paint(Graphics g) {
+		for (int i = 0; i < getRowCount(); i++)
+			for (int j = 0; j < getColumnCount(); j++)
 				field[i][j].paint(g);
-		
+
 	}
 
 	// Getter
@@ -191,30 +193,64 @@ public class Field extends JPanel implements IField {
 	}
 
 	private class MouseEventButton implements MouseListener {
-		private ACell cell;
-		private int i, j;
-
-		public MouseEventButton(ACell cell, int i, int j) {
-			this.cell = cell;
-			this.i = i;
-			this.j = j;
-
-		}
 
 		@Override
-		public void mouseClicked(MouseEvent arg0) {
+		public void mouseClicked(MouseEvent event) {
 			// TODO Auto-generated method stub
+			for (int i = 0; i < field.length; i++)
+				for (int j = 0; j < field[i].length; j++) {
+					ACell cell = field[i][j];
+					// Левый верхний угол клетки
+					int x1 = cell.getPoint().getX();
+					int y1 = cell.getPoint().getY();
+					// Правый нижний угол клетки
+					int x2 = cell.getPoint().getX() + cell.getSize();
+					int y2 = cell.getPoint().getY() + cell.getSize();
+					// Координаты клика
+					int x = event.getX();
+					int y = event.getY();
+					if (x >= x1 && y >= y1 && x <= x2 && y <= y2)//Если точка клика входит в клетку
+						if (event.getButton() == MouseEvent.BUTTON1
+								&& !cell.isWarning()) {
+							 cell.openCell();
+							 System.out.println("{"+i+", "+j+"}");
+							 
+							 
+							if (cell.isMine()) {
+								openMine();
+								JOptionPane
+										.showMessageDialog(null, "You Lose!");
+								HomeFrame.getGameFrame().dispose();
+								return;
+							}
 
+							try {
+								open(i, j);
+							} catch (Exception e) {
+
+							}
+						} else if (event.getButton() == MouseEvent.BUTTON3) {
+							if (!cell.isOpen())
+								cell.warning();
+
+						}
+				}
+			if (isOpenAll()) {
+				JOptionPane.showMessageDialog(null, "You Win!");
+				HomeFrame.getGameFrame().dispose();
+			}
+
+		
 		}
 
 		@Override
-		public void mouseEntered(MouseEvent arg0) {
+		public void mouseEntered(MouseEvent event) {
 			// TODO Auto-generated method stub
-
+			
 		}
 
 		@Override
-		public void mouseExited(MouseEvent arg0) {
+		public void mouseExited(MouseEvent event) {
 			// TODO Auto-generated method stub
 
 		}
@@ -222,34 +258,13 @@ public class Field extends JPanel implements IField {
 		@Override
 		public void mousePressed(MouseEvent event) {
 			// TODO Auto-generated method stub
-			if (event.getButton() == MouseEvent.BUTTON1 && !cell.isWarning()) {
-				// cell.openCell();
-				if (cell.isMine()) {
-					openMine();
-					JOptionPane.showMessageDialog(null, "You Lose!");
-					HomeFrame.getGameFrame().dispose();
-					return;
-				}
-
-				try {
-					open(i, j);
-				} catch (Exception e) {
-
-				}
-			} else if (event.getButton() == MouseEvent.BUTTON3) {
-				if (!cell.isOpen())
-					cell.warning();
-
-			}
-			if (isOpenAll()) {
-				JOptionPane.showMessageDialog(null, "You Win!");
-				HomeFrame.getGameFrame().dispose();
-			}
+			
 		}
 
 		@Override
-		public void mouseReleased(MouseEvent arg0) {
+		public void mouseReleased(MouseEvent event) {
 			// TODO Auto-generated method stub
+			
 
 		}
 
