@@ -1,16 +1,16 @@
 package core;
 
 import java.awt.Color;
+import java.awt.Graphics;
 
-import enums.TypeCell;
 import absctracts.ACell;
+import enums.TypeCell;
 
 public class Mine extends ACell {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -52864818062160319L;
 
 	public Mine() {
 		super(TypeCell.Mine);
@@ -19,7 +19,16 @@ public class Mine extends ACell {
 	@Override
 	public void openCell() {
 		super.openCell();
-		
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		g.setColor(Color.RED);
+		if (isOpen())
+			g.fill3DRect(getPoint().getX() + 5, getPoint().getY() + 10,
+					getSize(), getSize(), !isOpen());
+		else
+			super.paint(g);
 	}
 
 }
