@@ -15,7 +15,6 @@ public class Number extends ACell {
 	@Override
 	public void openCell(){
 		super.openCell();
-		this.setText(Integer.toString(getNumber()));
 	}
 
 	public int getNumber() {

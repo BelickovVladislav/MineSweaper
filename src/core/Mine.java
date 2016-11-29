@@ -19,8 +19,6 @@ public class Mine extends ACell {
 	@Override
 	public void openCell() {
 		super.openCell();
-		this.setText("M");
-		setBackground(Color.RED);
 		
 	}
 
