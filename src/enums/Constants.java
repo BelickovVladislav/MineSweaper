@@ -1,5 +1,8 @@
 package enums;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import frames.CustomSetting;
 import frames.HomeFrame;
 
@@ -9,30 +12,31 @@ public class Constants {
 	 */
 	
 	public Constants(Level level) {
-		
+		Dimension sizeScreen = Toolkit.getDefaultToolkit().getScreenSize();
 		switch (level) {
 		case Custom:
 			columnCount = HomeFrame.getCustomFrame().getColumnCount();
 			rowCount = HomeFrame.getCustomFrame().getRowCount();
 			mineCount = HomeFrame.getCustomFrame().getMineCount();
+			cellSize = (int)Math.sqrt((sizeScreen.getWidth()*sizeScreen.getHeight())/(columnCount*rowCount))/2;
 			break;
 		case Easy:
 			columnCount = easyColumnCount;
 			rowCount = easyRowCount;
 			mineCount = easyMineCount;
-			cellSize = easyCellSize;
+			cellSize = (int)Math.sqrt((sizeScreen.getWidth()*sizeScreen.getHeight())/(columnCount*rowCount))/2;
 			break;
 		case Medium:
 			columnCount = mediumColumnCount;
 			rowCount = mediumRowCount;
 			mineCount = mediumMineCount;
-			cellSize = mediumCellSize;
+			cellSize = (int)Math.sqrt((sizeScreen.getWidth()*sizeScreen.getHeight())/(columnCount*rowCount))/2;
 			break;
 		case Hard:
 			columnCount = hardColumnCount;
 			rowCount = hardRowCount;
 			mineCount = hardMineCount;
-			cellSize = hardCellSize;
+			cellSize = (int)Math.sqrt((sizeScreen.getWidth()*sizeScreen.getHeight())/(columnCount*rowCount))/2;
 			break;
 		default:
 			break;
@@ -58,17 +62,14 @@ public class Constants {
 	private final int easyColumnCount = 9;
 	private final int easyRowCount = 9;
 	private final int easyMineCount = 20;
-	private final int easyCellSize = 50;
 
 	private final int mediumColumnCount = 25;
 	private final int mediumRowCount = 10;
 	private final int mediumMineCount = 15;
-	private final int mediumCellSize = 50;
 
 	private final int hardColumnCount = 25;
 	private final int hardRowCount = 10;
 	private final int hardMineCount = 60;
-	private final int hardCellSize = 45;
 	
 	private int columnCount, rowCount, mineCount, cellSize;
 
