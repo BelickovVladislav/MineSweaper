@@ -1,7 +1,9 @@
 package core;
 
-import enums.TypeCell;
+import java.awt.Graphics;
+
 import absctracts.ACell;
+import enums.TypeCell;
 
 public class Number extends ACell {
 	
@@ -23,6 +25,12 @@ public class Number extends ACell {
 
 	public void setNumber(int number) {
 		this.number = number;
+	}
+	@Override
+	public void paint(Graphics g){
+		super.paint(g);
+		if(this.isOpen())
+			g.drawString(Integer.toString(getNumber()), getPoint().getX()+getSize()/2, getPoint().getY()+getSize()/2);
 	}
 	
 
