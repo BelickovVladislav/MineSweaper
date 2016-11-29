@@ -92,12 +92,8 @@ public class Field extends JPanel implements IField {
 		layout = new GridLayout(getRowCount(), getColumnCount());
 		this.setLayout(layout);
 		generate();
-		this.setPreferredSize(new Dimension(getRowCount() * getCellSize(),
-				getColumnCount() * getCellSize()));
-		this.setMinimumSize(new Dimension(getRowCount() * getCellSize(),
-				getColumnCount() * getCellSize()));
-		this.setMaximumSize((new Dimension(getRowCount() * getCellSize(),
-				getColumnCount() * getCellSize())));
+
+		this.setSize(new Dimension((getColumnCount()+1)*getCellSize()-35,(getRowCount()+1)*getCellSize()-12));
 	}
 
 	public Field() {
