@@ -1,5 +1,7 @@
 package core;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import absctracts.ACell;
@@ -29,6 +31,7 @@ public class Number extends ACell {
 	@Override
 	public void paint(Graphics g){
 		super.paint(g);
+		g.setColor(Color.WHITE);
 		if(this.isOpen())
 			g.drawString(Integer.toString(getNumber()), getPoint().getX()+getSize()/2, getPoint().getY()+getSize()/2);
 	}
