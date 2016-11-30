@@ -102,7 +102,7 @@ public abstract class ACell implements ICell {
 		return size;
 	}
 	public void paint(Graphics g) {
-		g.setColor(Color.YELLOW);
+		g.setColor(new Color(26,138,52));
 		g.fill3DRect(point.getX(), point.getY(), getSize(), getSize(), !isOpen());
 		
 	
