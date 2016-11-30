@@ -93,7 +93,7 @@ public class Field extends JPanel implements IField {
 		this.setLayout(layout);
 		generate();
 
-		this.setSize(new Dimension((getColumnCount()+1)*getCellSize()-35,(getRowCount()+1)*getCellSize()-12));
+		this.setSize(new Dimension((getColumnCount()+1)*getCellSize(),(getRowCount()+1)*getCellSize()));
 	}
 
 	public Field() {
