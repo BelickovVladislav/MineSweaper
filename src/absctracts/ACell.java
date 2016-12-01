@@ -17,13 +17,15 @@ public abstract class ACell implements ICell {
 	private boolean warning, question;
 	private Point point;
 	private int size;
-	
+	private Color cellColor;
+
 	public ACell() {
 		super();
 		type = TypeCell.Void;
 		open = false;
 		this.warning = false;
 		this.question = false;
+		this.cellColor = new Color(26, 138, 52);
 	}
 
 	public void createCell(Point point, int size) {
@@ -35,6 +37,7 @@ public abstract class ACell implements ICell {
 		this.type = type;
 		this.warning = false;
 		this.question = false;
+		this.cellColor = new Color(26, 138, 52);
 	}
 
 	public void warning() {
@@ -95,18 +98,19 @@ public abstract class ACell implements ICell {
 	public void setVoid() {
 		type = TypeCell.Void;
 	}
-	public Point getPoint(){
+
+	public Point getPoint() {
 		return point;
 	}
-	public int getSize(){
+
+	public int getSize() {
 		return size;
 	}
-	public void paint(Graphics g) {
-		g.setColor(new Color(26,138,52));
-		g.fill3DRect(point.getX(), point.getY(), getSize(), getSize(), !isOpen());
-		
-	
 
+	public void paint(Graphics g) {
+		g.setColor(cellColor);
+		g.fill3DRect(point.getX(), point.getY(), getSize(), getSize(),
+				!isOpen());
 	}
 
 	public void setSize(int size) {
