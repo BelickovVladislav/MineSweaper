@@ -1,16 +1,20 @@
 package frames;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
-import javax.swing.SpinnerListModel;
-import javax.swing.SpinnerModel;
+import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import enums.Level;
 
@@ -23,7 +27,7 @@ public class CustomSetting extends JFrame {
 
 	public CustomSetting() {
 		
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		layout = new GridLayout(4, 2);
 		this.setLayout(layout);
 		this.setSize(300, 400);
@@ -33,6 +37,51 @@ public class CustomSetting extends JFrame {
 		okButton = new JButton("Ок");
 		cancelButton = new JButton("Отмена");
 		final JFrame frame = this;
+		this.addWindowListener(new WindowListener() {
+			
+			@Override
+			public void windowOpened(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowIconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				HomeFrame.getHomeFrame().setVisible(true);
+				
+			}
+			
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		cancelButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -56,11 +105,24 @@ public class CustomSetting extends JFrame {
 			}
 		});
 
-		column = new JSpinner(new SpinnerNumberModel(9, 1, 40, 1));
-		row = new JSpinner(new SpinnerNumberModel(9, 1, 40, 1));
-		mine = new JSpinner(new SpinnerNumberModel(9, 1, 40, 1));
-
-
+		column = new JSpinner(new SpinnerNumberModel(9, 9, 40, 1));
+		row = new JSpinner(new SpinnerNumberModel(9, 9, 40, 1));
+		mine = new JSpinner(new SpinnerNumberModel(9, 9, 40, 1));
+		ChangeListener listener = new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent event) {
+				// TODO Auto-generated method stub
+				mine.setModel(new SpinnerNumberModel(9,9,(Integer.parseInt(row.getValue().toString())*Integer.parseInt(column.getValue().toString()))/2,1));
+				disableEditable(mine);
+			}
+		};
+		column.addChangeListener(listener);
+		row.addChangeListener(listener);
+		disableEditable(column);
+		disableEditable(row);
+		disableEditable(mine);
+		
 		this.add(labelRow);
 		this.add(row);
 		this.add(labelColumn);
@@ -72,6 +134,12 @@ public class CustomSetting extends JFrame {
 
 		this.setVisible(true);
 
+	}
+	private void disableEditable(JSpinner ed){
+		JTextField tf = ((JSpinner.DefaultEditor) ed.getEditor()).getTextField();
+		tf.setForeground(Color.BLACK); 
+		tf.setBackground(Color.WHITE);
+		tf.setEditable(false);		
 	}
 
 	public int getColumnCount() {
