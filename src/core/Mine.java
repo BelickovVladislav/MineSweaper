@@ -2,11 +2,14 @@ package core;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import absctracts.ACell;
 import enums.TypeCell;
 
 public class Mine extends ACell {
+	private Image mineImage;
 
 	/**
 	 * 
@@ -14,6 +17,8 @@ public class Mine extends ACell {
 
 	public Mine() {
 		super(TypeCell.Mine);
+		mineImage = Toolkit.getDefaultToolkit().getImage("images/mine.png");
+
 	}
 
 	@Override
@@ -23,11 +28,13 @@ public class Mine extends ACell {
 
 	@Override
 	public void paint(Graphics g) {
-		g.setColor(Color.RED);
-		if (isOpen())
+		if (isOpen()) {
+			g.setColor(Color.RED);
 			g.fill3DRect(getPoint().getX(), getPoint().getY(), getSize(),
 					getSize(), !isOpen());
-		else
+			g.drawImage(mineImage, getPoint().getX(), getPoint().getY(),
+					getSize(), getSize(), null);
+		} else
 			super.paint(g);
 	}
 
