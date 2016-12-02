@@ -71,7 +71,7 @@ public class Field extends JPanel implements IField {
 				for (int j = -1; j < 2; j++)
 					try {
 						if (field[pointI + i][pointJ + j].isVoid()) {
-							if (!field[pointI + i][pointJ + j].isOpen()) {
+							if (!field[pointI + i][pointJ + j].isOpen() && !field[pointI + i][pointJ + j].isWarning()) {
 								field[pointI + i][pointJ + j].openCell();
 								open(pointI + i, pointJ + j);
 							}
