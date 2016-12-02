@@ -25,6 +25,7 @@ public class GameFrame extends JFrame {
 		 */
 		Field field = new Field(level);
 		this.setSize(field.getSize());
+		this.setResizable(false);
 		add(field, BorderLayout.CENTER);
 		setVisible(true);
 		addWindowListener(new WindowListener() {
