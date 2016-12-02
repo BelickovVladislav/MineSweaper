@@ -4,8 +4,8 @@ import interfaces.ICell;
 
 import java.awt.Color;
 import java.awt.Graphics;
-
-import javax.swing.JButton;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import enums.Point;
 import enums.TypeCell;
@@ -18,7 +18,7 @@ public abstract class ACell implements ICell {
 	private Point point;
 	private int size;
 	private Color cellColor;
-
+	Image flagImage, questionImage;
 	public ACell() {
 		super();
 		type = TypeCell.Void;
@@ -29,6 +29,8 @@ public abstract class ACell implements ICell {
 	}
 
 	public void createCell(Point point, int size) {
+		flagImage = Toolkit.getDefaultToolkit().getImage("images/flag.png");
+		questionImage = Toolkit.getDefaultToolkit().getImage("images/question.png");
 		this.point = point;
 		this.setSize(size);
 	}
@@ -109,8 +111,15 @@ public abstract class ACell implements ICell {
 
 	public void paint(Graphics g) {
 		g.setColor(cellColor);
-		g.fill3DRect(point.getX(), point.getY(), getSize(), getSize(),
+		g.fill3DRect(getPoint().getX(), getPoint().getY(), getSize(), getSize(),
 				!isOpen());
+		
+		if(isWarningMine()){
+			g.drawImage(flagImage, getPoint().getX()+getSize()/4, getPoint().getY()+getSize()/4, getSize()/2,getSize()/2,null);					
+		}
+		if(question){
+			g.drawImage(questionImage, getPoint().getX()+getSize()/4, getPoint().getY()+getSize()/4, getSize()/2,getSize()/2,null);		
+		}
 	}
 
 	public void setSize(int size) {
