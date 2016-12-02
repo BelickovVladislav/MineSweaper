@@ -11,14 +11,18 @@ public class Number extends ACell {
 	
 	
 	private int number;
+	private Font font;
 
 	public Number(int number) {
 		super(TypeCell.Number);
 		setNumber(number);
+		
+		
 	}
 	@Override
 	public void openCell(){
 		super.openCell();
+		font = new Font("Verdana", Font.PLAIN, getSize()/2);
 	}
 
 	public int getNumber() {
@@ -32,8 +36,9 @@ public class Number extends ACell {
 	public void paint(Graphics g){
 		super.paint(g);
 		g.setColor(Color.WHITE);
+		g.setFont(font);
 		if(this.isOpen())
-			g.drawString(Integer.toString(getNumber()), getPoint().getX()+getSize()/2, getPoint().getY()+getSize()/2);
+			g.drawString(Integer.toString(getNumber()), getPoint().getX()+getSize()/4, getPoint().getY()+getSize()/2);
 	}
 	
 
