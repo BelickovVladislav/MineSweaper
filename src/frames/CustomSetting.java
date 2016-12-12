@@ -113,7 +113,10 @@ public class CustomSetting extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent event) {
 				// TODO Auto-generated method stub
-				mine.setModel(new SpinnerNumberModel(9,9,(Integer.parseInt(row.getValue().toString())*Integer.parseInt(column.getValue().toString()))/2,1));
+				int rowNow = Integer.parseInt(row.getValue().toString());
+				int columnNow = Integer.parseInt(column.getValue().toString());
+				int mineNow = Integer.parseInt(mine.getValue().toString());
+				mine.setModel(new SpinnerNumberModel(rowNow*columnNow/2>mineNow? mineNow:9,9,rowNow*columnNow/2,1));
 				disableEditable(mine);
 			}
 		};
