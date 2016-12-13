@@ -112,7 +112,7 @@ public abstract class ACell implements ICell {
 	public void paint(Graphics g) {
 		g.setColor(cellColor);
 		g.fill3DRect(getPoint().getX(), getPoint().getY(), getSize(), getSize(),
-				!isOpen());
+				!isOpen()|| isWarningMine());
 		
 		if(isWarningMine()){
 			g.drawImage(flagImage, getPoint().getX()+getSize()/4, getPoint().getY()+getSize()/4, getSize()/2,getSize()/2,null);					
