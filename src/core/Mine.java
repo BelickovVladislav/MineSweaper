@@ -28,7 +28,7 @@ public class Mine extends ACell {
 
 	@Override
 	public void paint(Graphics g) {
-		if (isOpen()) {
+		if (isOpen()&&!isWarningMine()) {
 			g.setColor(Color.RED);
 			g.fill3DRect(getPoint().getX(), getPoint().getY(), getSize(),
 					getSize(), !isOpen());
