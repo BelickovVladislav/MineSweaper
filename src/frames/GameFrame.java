@@ -24,10 +24,13 @@ public class GameFrame extends JFrame {
 		 * Creating field and set size
 		 */
 		Field field = new Field(level);
-		this.setSize(field.getSize());
-		this.setResizable(false);
+		
+		
 		add(field, BorderLayout.CENTER);
+		this.pack();
 		setVisible(true);
+		this.setMaximumSize(this.getSize());
+		this.setResizable(false);
 		addWindowListener(new WindowListener() {
 
 			@Override
