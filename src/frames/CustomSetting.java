@@ -26,7 +26,7 @@ public class CustomSetting extends JFrame {
 	GridLayout layout;
 
 	public CustomSetting() {
-		
+
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		layout = new GridLayout(4, 2);
 		this.setLayout(layout);
@@ -38,69 +38,69 @@ public class CustomSetting extends JFrame {
 		cancelButton = new JButton("Отмена");
 		final JFrame frame = this;
 		this.addWindowListener(new WindowListener() {
-			
+
 			@Override
 			public void windowOpened(WindowEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void windowIconified(WindowEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void windowDeiconified(WindowEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void windowDeactivated(WindowEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void windowClosing(WindowEvent arg0) {
 				// TODO Auto-generated method stub
 				HomeFrame.getHomeFrame().setVisible(true);
-				
+
 			}
-			
+
 			@Override
 			public void windowClosed(WindowEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void windowActivated(WindowEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		cancelButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent key) {
 				// TODO Auto-generated method stub
 				HomeFrame.getHomeFrame().setVisible(true);
 				frame.dispose();
-				
+
 			}
 		});
 		okButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				columnCount = Integer.parseInt(column.getValue().toString());
 				mineCount = Integer.parseInt(mine.getValue().toString());
 				rowCount = Integer.parseInt(row.getValue().toString());
-				HomeFrame.setGameFrame(new GameFrame(Level.Custom));				
+				HomeFrame.setGameFrame(new GameFrame(Level.Custom));
 				frame.dispose();
 			}
 		});
@@ -109,14 +109,15 @@ public class CustomSetting extends JFrame {
 		row = new JSpinner(new SpinnerNumberModel(9, 9, 40, 1));
 		mine = new JSpinner(new SpinnerNumberModel(9, 9, 40, 1));
 		ChangeListener listener = new ChangeListener() {
-			
+
 			@Override
 			public void stateChanged(ChangeEvent event) {
 				// TODO Auto-generated method stub
 				int rowNow = Integer.parseInt(row.getValue().toString());
 				int columnNow = Integer.parseInt(column.getValue().toString());
 				int mineNow = Integer.parseInt(mine.getValue().toString());
-				mine.setModel(new SpinnerNumberModel(rowNow*columnNow/2>mineNow? mineNow:9,9,rowNow*columnNow/2,1));
+				mine.setModel(new SpinnerNumberModel(rowNow * columnNow / 2 > mineNow ? mineNow : 9, 9, rowNow
+						* columnNow / 2, 1));
 				disableEditable(mine);
 			}
 		};
@@ -125,24 +126,25 @@ public class CustomSetting extends JFrame {
 		disableEditable(column);
 		disableEditable(row);
 		disableEditable(mine);
-		
+
 		this.add(labelRow);
 		this.add(row);
 		this.add(labelColumn);
 		this.add(column);
 		this.add(labelMine);
-		this.add(mine);		
+		this.add(mine);
 		this.add(okButton);
 		this.add(cancelButton);
 
 		this.setVisible(true);
 
 	}
-	private void disableEditable(JSpinner ed){
+
+	private void disableEditable(JSpinner ed) {
 		JTextField tf = ((JSpinner.DefaultEditor) ed.getEditor()).getTextField();
-		tf.setForeground(Color.BLACK); 
+		tf.setForeground(Color.BLACK);
 		tf.setBackground(Color.WHITE);
-		tf.setEditable(false);		
+		tf.setEditable(false);
 	}
 
 	public int getColumnCount() {
@@ -152,9 +154,9 @@ public class CustomSetting extends JFrame {
 	public int getRowCount() {
 		return rowCount;
 	}
+
 	public int getMineCount() {
 		return mineCount;
 	}
-
 
 }

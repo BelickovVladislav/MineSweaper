@@ -19,9 +19,9 @@ import enums.Point;
 import frames.HomeFrame;
 
 public class Field extends JPanel implements IField {
-	private Constants constant;
-	private ACell[][] field;
-	GridLayout layout;
+	private Constants	constant;
+	private ACell[][]	field;
+	GridLayout		layout;
 
 	/**
 	 * check open all cells;
@@ -36,7 +36,8 @@ public class Field extends JPanel implements IField {
 				if (field[i][j].isVoid() || field[i][j].isNumber()) {
 					if (field[i][j].isOpen())
 						count++;
-				} else if (field[i][j].isMine())
+				}
+				else if (field[i][j].isMine())
 					if (field[i][j].isWarningMine())
 						count++;
 		return count == field.length * field[0].length;
@@ -71,13 +72,16 @@ public class Field extends JPanel implements IField {
 				for (int j = -1; j < 2; j++)
 					try {
 						if (field[pointI + i][pointJ + j].isVoid()) {
-							if (!field[pointI + i][pointJ + j].isOpen() && !field[pointI + i][pointJ + j].isWarning()) {
+							if (!field[pointI + i][pointJ + j].isOpen()
+									&& !field[pointI + i][pointJ + j].isWarning()) {
 								field[pointI + i][pointJ + j].openCell();
 								open(pointI + i, pointJ + j);
 							}
-						} else if (field[pointI + i][pointJ + j].isNumber())
+						}
+						else if (field[pointI + i][pointJ + j].isNumber())
 							field[pointI + i][pointJ + j].openCell();
-					} catch (Exception ex) {
+					}
+					catch (Exception ex) {
 					}
 
 		}
@@ -93,7 +97,7 @@ public class Field extends JPanel implements IField {
 		this.setLayout(layout);
 		generate();
 
-		this.setPreferredSize(new Dimension(getColumnCount()*getCellSize(),getRowCount()*getCellSize()));
+		this.setPreferredSize(new Dimension(getColumnCount() * getCellSize(), getRowCount() * getCellSize()));
 	}
 
 	public Field() {
@@ -135,7 +139,8 @@ public class Field extends JPanel implements IField {
 									count++;
 
 								}
-							} catch (Exception ex) {
+							}
+							catch (Exception ex) {
 							}
 
 						}
@@ -149,7 +154,7 @@ public class Field extends JPanel implements IField {
 				field[i][j].createCell(new Point(j * constant.getCellSize(), i
 						* constant.getCellSize()), constant.getCellSize());
 			}
-			
+
 		}
 		this.addMouseListener(new MouseEventButton());
 	}
@@ -200,10 +205,10 @@ public class Field extends JPanel implements IField {
 					// Координаты клика
 					int x = event.getX();
 					int y = event.getY();
-					if (x >= x1 && y >= y1 && x <= x2 && y <= y2)//Если точка клика входит в клетку
+					if (x >= x1 && y >= y1 && x <= x2 && y <= y2) // Если точка клика входит в клетку
 						if (event.getButton() == MouseEvent.BUTTON1
 								&& !cell.isWarning()) {
-							 cell.openCell();
+							cell.openCell();
 							if (cell.isMine()) {
 								openMine();
 								JOptionPane
@@ -214,10 +219,12 @@ public class Field extends JPanel implements IField {
 
 							try {
 								open(i, j);
-							} catch (Exception e) {
+							}
+							catch (Exception e) {
 
 							}
-						} else if (event.getButton() == MouseEvent.BUTTON3) {
+						}
+						else if (event.getButton() == MouseEvent.BUTTON3) {
 							if (!cell.isOpen())
 								cell.warning();
 
@@ -228,13 +235,12 @@ public class Field extends JPanel implements IField {
 				HomeFrame.getGameFrame().dispose();
 			}
 
-		
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent event) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
@@ -246,13 +252,12 @@ public class Field extends JPanel implements IField {
 		@Override
 		public void mousePressed(MouseEvent event) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent event) {
 			// TODO Auto-generated method stub
-			
 
 		}
 
